@@ -1,0 +1,130 @@
+﻿@using NoteSharingApp.ViewModels
+@model ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<style>
+    .profile-head {
+        transform: translateY(5rem);
+    }
+
+    .cover {
+        background-color: white;
+        background-size: cover;
+        background-repeat: no-repeat
+    }
+
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+</style>
+<div class="row py-5 px-4">
+    <div class="container-fluid text-bg-light p-0">
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 cover text-bg-light">
+                <div class="media align-items-end profile-head">
+                    <div class="profile mr-3">
+                        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" alt="..." width="130" class="rounded mb-2 img-thumbnail" style="background-color: #5ec273;border:none">
+                        <a href="#" class="btn btn-outline-dark btn-sm btn-block align-bottom mb-2" style="color: #5ec273; border-color: #5ec273 ">Edit profile</a>
+                    </div>
+                    <div class="media-body mb-5">
+                        <h4 class="mt-0 mb-0">Mark Williams</h4>
+                        <p class="small mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i>New York
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">215</h5>
+                        <small class="text-bg-light">
+                            <i class="fa fa-image mr-1"></i> Photos
+                        </small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">745</h5>
+                        <small class="">
+                            <i class="fa fa-user mr-1">
+                            </i> Followers
+                        </small>
+                    </li>
+                    <li class="list-inline-item">
+                        <h5 class="font-weight-bold mb-0 d-block">340</h5>
+                        <small class="">
+                            <i class="fa fa-user mr-1"></i> Following
+                        </small>
+                    </li>
+                </ul>
+            </div>
+            <div class="px-4 py-3 bg-dark text-bg-dark">
+                <h5 class="mb-0">About</h5>
+                <div class="p-4 rounded shadow-sm">
+                    <p class="font-italic mb-0">Web Developer</p>
+                    <p class="font-italic mb-0">Lives in New York</p>
+                    <p class="font-italic mb-0">Photographer</p>
+                </div>
+            </div>
+            <form method="post" action="/Note/Post" class="bg-dark text-bg-dark">
+                <div class="form-floating mb-3 ">
+                    <input type="text" class="form-control" name="Title" id="Title">
+                    <label for="Title">Title</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Leave a comment here" name="Text" id="Text" style="height: 100px"></textarea>
+                    <label for="Text">Text</label>
+                </div>
+                <div class="form-floating">
+                    <select class="form-select" name="CategoryId" id="CategoryId" aria-label="Floating label select example">
+                        <option selected disabled>Open this select menu</option>
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Title</option>
+                        }
+                    </select>
+                    <label for="floatingSelect">Categories</label>
+                </div>
+                <div>
+                    <button type="submit"></button>
+                </div>
+            </form>
+            <div class="py-4 px-4 bg-dark text-bg-dark">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h5 class="mb-0">Recent Notes</h5>
+                </div>
+                <div class="row">
+                    <div class="row mt-4">
+                        <!--Categories-->
+                        <div class="col-md-10">
+                            <div class="row ">
+                                <!--Entries-->
+                                @foreach (var Note in Model.Notes)
+                                {
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card text-bg-dark mb-4" style="min-height:20vh">
+                                            <h5 class="card-header">@Note.Owner.Username</h5>
+                                            <div class="card-body" style="height:20vh">
+
+                                                <p class="card-text overflow-auto" style="height:15vh">@Note.Text</p>
+                                            </div>
+                                            <div>
+                                                <p class="col-5 card-subtitle mb-2 ms-4 text-body-secondary  float-start fa fa-heart-o fs-5"> @Note.LikeCount</p>
+                                                <p class=" col-6 card-subtitle mb-1 me-2 text-body-secondary float-end text-end" style="font-size:small;"><span class="fa fa-clock-o"></span> @Note.ModifiedOn.ToString("dddd, dd MMMM yyyy hh:mm tt")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

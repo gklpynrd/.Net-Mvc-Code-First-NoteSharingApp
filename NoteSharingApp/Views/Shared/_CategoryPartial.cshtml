@@ -1,0 +1,42 @@
+﻿
+@using NoteSharingApp.BusinessLayer
+@using NoteSharingApp.Entities
+
+
+
+@{
+    CategoryManager cm = new CategoryManager();
+    List<Category> list = cm.List();
+}
+
+@*<ul class="nav flex-column col-3 justify-content-start">
+        @foreach (var item in list)
+        {
+            <li class="nav-item">
+                <a class="list-group-item" href="/Category/Select/@item.Id" title="@item.Description"><span class="fa fa-arrow-right"></span> @item.Title</a>
+            </li>
+        }
+    </ul>*@
+<div class="col-2 ">
+    <div class="position-fixed" style="top:8vh;">
+        <div class="row ">
+            <div>
+                <div class="text-white">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Categories</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        @foreach (var item in list)
+                        {
+                            <li class="nav-item">
+                                <a href="/Category/Select/@item.Id" class="nav-link align-middle px-0">
+                                    <span class="ms-1 d-none d-sm-inline">@item.Title</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

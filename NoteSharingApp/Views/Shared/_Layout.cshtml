@@ -1,0 +1,109 @@
+﻿@using NoteSharingApp.Helpers
+
+@{ 
+    var user = SessionHelpers.User;
+}
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NoteShare</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/shop-homepage.css" rel="stylesheet" />
+
+    <script src="~/Content/Scripts/jquery-3.7.1.min.js"></script>
+
+    <script src="~/Content/Scripts/bootstrap.bundle.min.js"></script>
+
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+</head>
+
+<body data-bs-theme="dark">
+
+    <!-- Navigation -->
+    <nav class="navbar  navbar-expand-lg sticky-top" style="background-color: #5ec273; ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/.">NoteShare</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @if (user !=null && user.IsAdmin)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><span class="fa fa-wrench"></span> Admin</a>
+                        </li>
+                    }
+
+                    <li>
+                        <a class="nav-link" href="/Home/MostLiked"><span class="fa fa-heart"></span> Most Liked</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/Home/LastEntries"><span class="fa fa-th-list"></span> Last Entries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/About"><span class="fa fa-info-sign"></span> About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    @{
+
+                        if (user == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Login"><span class="fa fa-sign-in"></span> Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><span class="fa fa-user"></span> Sign Up</a>
+                            </li>
+                        }
+                        else
+                        {
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Profile"><span class="fa fa-user"></span> @user.Username</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/User/Logout"><span class="fa fa-sign-out"></span> Log Out</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    <!-- /.container -->
+    <div class="container">
+        <hr>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-4 text-center">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <p>All rights reserved &copy; NoteSharingApp @DateTime.Now.Year</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
